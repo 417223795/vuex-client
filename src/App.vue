@@ -1,28 +1,28 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <router-view></router-view>
+    <!--我们在router里的index中设置了meta属性，这里进行判断如果为true则显示-->
+    <footer-guide v-show="$route.meta.showFooter"></footer-guide>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
-
+import FooterGuide from './components/FooterGuide/FooterGuide.vue'
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    FooterGuide
+  },
+  // 异步获取address
+  mounted () {
+    this.$store.dispatch('getAddress')
+    this.$store.dispatch('getUserInfo')
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="stylus" rel="stylesheet/stylus">
+  #app
+    width 100%
+    height 100%
+    background #f5f5f5
 </style>
